@@ -1,42 +1,54 @@
-import { List, ListItem, Card, CardContent, Typography, CardActions, Button } from '@mui/material'
+import * as React from 'react'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import { useNavigate } from 'react-router-dom'
 
 export default function ListApplicationPage ({ data }) {
+  const tableHead = [
+    '№',
+    'Название',
+    'Дата',
+    'Статус',
+    'Ответственный',
+    '№ Счета',
+    '№ Платежки',
+    '№ УПД'
+  ]
+  const navigate = useNavigate()
+  console.log(navigate)
+
   return (
-    <List>
-      {data.map(item => {
-        return (
-          <Card key={item.id} sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography
-                gutterBottom
-                sx={{ color: 'text.secondary', fontSize: 14 }}
-              >
-                Word of the Day
-              </Typography>
-              <Typography variant='h5' component='div'>
-                benevolent
-              </Typography>
-              <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
-                adjective
-              </Typography>
-              <Typography variant='body2'>
-                well meaning and kindly.
-                <br />
-                {'"a benevolent smile"'}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size='small'>Learn More</Button>
-            </CardActions>
-            <ListItem >
-              Название заявки: {item.title} <br />
-              id: {item.id} <br />
-              Ответственный: {item.responsible} <br />
-              Статус: {item.status}
-            </ListItem>
-          </Card>
-        )
-      })}
-    </List>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+        <TableHead>
+          <TableRow>
+            {tableHead.map(item => {
+              return <TableCell key={item}>{item}</TableCell>
+            })}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map(item => (
+            <TableRow
+              onClick={() => {
+                navigate(`/application/${item.id}`)
+              }}
+              key={item.id}
+            >
+              <TableCell>{item.id}</TableCell>
+              <TableCell>{item.title}</TableCell>
+              <TableCell align='right'>{item.date}</TableCell>
+              <TableCell align='right'>{item.status}</TableCell>
+              <TableCell align='right'>{item.responsible}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   )
 }

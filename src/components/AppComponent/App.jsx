@@ -5,6 +5,8 @@ import './App.css'
 import { data } from '../../utils/data'
 import CreateApplicationPage from '../../pages/CreateApplicationPage/CreateApplicationPage.jsx'
 import ListApplicationPage from '../../pages/ListApplicationPage/ListApplicationPage.jsx'
+import ItemApplicationComponent from '../../pages/ItemApplicationComponent/ItemApplicationComponent.jsx'
+
 
 function App () {
   function heandlerSendData (valueTitle, valueUser, valueStatus) {
@@ -52,7 +54,7 @@ function App () {
           path='/application'
           element={<ListApplicationPage data={data} />}
         />
-        <Route path='/application/:id' element='id' />
+        <Route path='/application/:id' element={<ItemApplicationComponent/>} />
         <Route path='/application/:id/edit' element='edit' />
       </Routes>
     </div>
