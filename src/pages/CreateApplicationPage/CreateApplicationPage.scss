@@ -1,0 +1,19 @@
+.form{
+    &__flex{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    &__label{
+        font-size: 1.25rem;
+        text-align: center;
+        display: block;
+
+    }
+    &__input{
+        &:not(:last-child){
+        }
+    }
+    &__button{}
+}

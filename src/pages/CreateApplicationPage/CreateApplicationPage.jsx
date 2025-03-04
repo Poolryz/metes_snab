@@ -1,52 +1,66 @@
-import { Button, FormLabel, MenuItem, TextField } from "@mui/material";
-import { useState } from "react";
+import { Button, FormLabel, MenuItem, TextField } from '@mui/material'
+import './CreateApplicationPage.scss'
+import { useState } from 'react'
 
-export default function CreateApplicationPage({heandlerSendData}){
-    const [valueStatus, setValueStatus] = useState('lol')
-    const [valueTitle, setValueTitle] = useState('lol')
-    const [valueUser, setValueUser] = useState('lol')
-    function heandlerChangeStatus (e){
-        setValueStatus(e.target.value)
-    }
-    function hendlerChangeTitle(e){
-        setValueTitle(e.target.value)
-    }
-    function hendlerChangeUser(e){
-        setValueUser(e.target.value)
-    }
-    
-    return(
-        <>
-        <FormLabel>Форма для создания заявки</FormLabel> <br />
-        <TextField value={valueTitle} onChange={(e)=>{
-            hendlerChangeTitle(e)
-        }} placeholder="Название заявки"/> <br />
-        <TextField value={valueUser} onChange={(e)=>{
-            hendlerChangeUser(e)
-        }} placeholder="Ответственный"/> <br />
-        <TextField
-          id="standard-select-currency"
-          select
-          label="Select"
-          value={valueStatus}
-          onChange={(e)=>{
-            heandlerChangeStatus(e)
-          }}
-          helperText="Выбурете статус"
+export default function CreateApplicationPage ({ heandlerSendData }) {
+  const [valueStatus, setValueStatus] = useState('')
+  const [valueTitle, setValueTitle] = useState('')
+  const [valueUser, setValueUser] = useState('')
 
-        >
-            <MenuItem value='lol'>
-                LOL
-            </MenuItem>
-            <MenuItem value='notlol'>
-                NOTLOL
-            </MenuItem>
-
-        </TextField> <br />
-        <Button onClick={()=>{
-            heandlerSendData(valueTitle, valueUser, valueStatus)
-        }} color="primary">Создать</Button>
-        </>
-        
-    )
+  return (
+    <div className='create-app-page'>
+      <div className='form'>
+        <div className='form__flex'>
+          <FormLabel className='form__label'>
+            Форма для создания заявки
+          </FormLabel>
+          <TextField
+            className='form__input'
+            value={valueTitle}
+            onChange={e => {
+              setValueTitle(e.target.value)
+            }}
+            placeholder='Название заявки'
+          />
+          <TextField
+            className='form__input'
+            value={valueUser}
+            onChange={e => {
+              setValueUser(e.target.value)
+            }}
+            placeholder='Ответственный'
+          />
+          <TextField
+            className='form__input'
+            id='standard-select-currency'
+            select
+            label=''
+            value={valueStatus}
+            onChange={e => {
+              setValueStatus(e.target.value)
+            }}
+            helperText='Выбурете статус'
+          >
+            <MenuItem value='job'>В работе</MenuItem>
+            <MenuItem value='saccess'>Выполнена</MenuItem>
+            <MenuItem value='cancel'>Отмена</MenuItem>
+          </TextField>
+          <Button
+            variant='outlined'
+            className='form__button'
+            color='primary'
+            onClick={() => {
+              if (!valueTitle || !valueUser || !valueStatus) {
+                console.log(Error('Введите данные'))
+                return
+              }
+              heandlerSendData(valueTitle, valueUser, valueStatus)
+            }}
+          >
+            Создать
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
 }
