@@ -1,19 +1,29 @@
-.form{
-    &__flex{
-        display: flex;
+.form {
+    &__flex {
+        display       : flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+        align-items   : flex-start;
+        gap           : 15px;
     }
-    &__label{
-        font-size: 1.25rem;
+
+    &__label {
+        font-size : 1.25rem;
         text-align: center;
-        display: block;
+        display   : block;
 
     }
-    &__input{
-        &:not(:last-child){
-        }
+
+    &__input {}
+
+    &__file {
+        position: absolute;
+        width   : 0;
+        height  : 0;
+        overflow: hidden;
+        visibility: hidden;
+
     }
-    &__button{}
+
+    &__button {}
+
 }

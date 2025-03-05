@@ -1,11 +1,30 @@
-import { Button, FormLabel, MenuItem, TextField } from '@mui/material'
+import { Button, FormLabel, MenuItem } from '@mui/material'
+import FormInputComponent from '../../components/FormInputComponent/FormInputComponent.jsx'
 import './CreateApplicationPage.scss'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 export default function CreateApplicationPage ({ heandlerSendData }) {
   const [valueStatus, setValueStatus] = useState('')
   const [valueTitle, setValueTitle] = useState('')
   const [valueUser, setValueUser] = useState('')
+
+  const [fileInvoices, setFileInvoices] = useState([])
+  const [filePayment, setFilePayment] = useState([])
+  const [filePeceipt, setFilePeceipt] = useState([])
+
+  const buttonClickInvoices = useRef()
+  const buttonClickPayment = useRef()
+  const buttonClickPeceipt = useRef()
+
+  function heandlerClickInput (buttonSend) {
+    buttonSend.current.click()
+  }
+
+  function heandlerSetFile (set, e) {
+    set(e)
+  }
+
+ 
 
   return (
     <div className='create-app-page'>
@@ -14,37 +33,57 @@ export default function CreateApplicationPage ({ heandlerSendData }) {
           <FormLabel className='form__label'>
             Форма для создания заявки
           </FormLabel>
-          <TextField
-            className='form__input'
+          <FormInputComponent
+            setFunc={setValueTitle}
             value={valueTitle}
-            onChange={e => {
-              setValueTitle(e.target.value)
-            }}
-            placeholder='Название заявки'
+            placeholder={'Название заявки'}
           />
-          <TextField
-            className='form__input'
+          <FormInputComponent
+            setFunc={setValueUser}
             value={valueUser}
-            onChange={e => {
-              setValueUser(e.target.value)
-            }}
-            placeholder='Ответственный'
+            placeholder={'Ответственный'}
           />
-          <TextField
-            className='form__input'
-            id='standard-select-currency'
-            select
-            label=''
+          <FormInputComponent
+            setFunc={setValueStatus}
             value={valueStatus}
-            onChange={e => {
-              setValueStatus(e.target.value)
-            }}
-            helperText='Выбурете статус'
+            helperText={'Выберите статус'}
+            select={true}
           >
             <MenuItem value='job'>В работе</MenuItem>
             <MenuItem value='saccess'>Выполнена</MenuItem>
             <MenuItem value='cancel'>Отмена</MenuItem>
-          </TextField>
+          </FormInputComponent>
+          <Button
+            variant='contained'
+            className='form__button'
+            color='primary'
+            onClick={() => {
+              heandlerClickInput(buttonClickInvoices)
+            }}
+          >
+            Прикрепить счет
+          </Button>
+          <Button
+            variant='contained'
+            className='form__button'
+            color='primary'
+            onClick={() => {
+              heandlerClickInput(buttonClickPayment)
+            }}
+          >
+            Прикрепить квиток
+          </Button>
+          <Button
+            variant='contained'
+            className='form__button'
+            color='primary'
+            onClick={() => {
+              heandlerClickInput(buttonClickPeceipt)
+            }}
+          >
+            Прикрепить УПД
+          </Button>
+
           <Button
             variant='outlined'
             className='form__button'
@@ -54,11 +93,37 @@ export default function CreateApplicationPage ({ heandlerSendData }) {
                 console.log(Error('Введите данные'))
                 return
               }
-              heandlerSendData(valueTitle, valueUser, valueStatus)
+              heandlerSendData(valueTitle, valueUser, valueStatus, fileInvoices, filePayment,filePeceipt)
             }}
           >
             Создать
           </Button>
+
+          <input
+            className='form__file'
+            type='file'
+            multiple
+            ref={buttonClickInvoices}
+            onChange={e => {
+              heandlerSetFile(setFileInvoices, e.target.files)
+            }}
+          />
+          <input
+            className='form__file'
+            type='file'
+            ref={buttonClickPayment}
+            onChange={e => {
+              heandlerSetFile(setFilePayment, e.target.files)
+            }}
+          />
+          <input
+            className='form__file'
+            type='file'
+            ref={buttonClickPeceipt}
+            onChange={e => {
+              heandlerSetFile(setFilePeceipt, e.target.files)
+            }}
+          />
         </div>
       </div>
     </div>
