@@ -7,8 +7,8 @@ import CreateApplicationPage from '../../pages/CreateApplicationPage/CreateAppli
 import ListApplicationPage from '../../pages/ListApplicationPage/ListApplicationPage.jsx'
 import ItemApplicationComponent from '../../pages/ItemApplicationComponent/ItemApplicationComponent.jsx'
 
-function App () {
-  function heandlerSendData (
+function App() {
+  function heandlerSendData(
     valueTitle,
     valueUser,
     valueStatus,
@@ -17,17 +17,17 @@ function App () {
     filePeceipt = []
   ) {
     const formData = new FormData()
-    formData.append('fileInvoices',fileInvoices)
-    
+    formData.append('fileInvoices', fileInvoices)
+
     const send = fetch('http://localhost:3000/api', {
       method: 'POST',
-      body:formData
+      body: formData
     })
     send.then(data => {
       return console.log(data)
     })
     let obj = {
-      id: 2,
+      id: 3,
       title: valueTitle,
       responsible: valueUser,
       status: valueStatus
@@ -70,7 +70,7 @@ function App () {
           path='/application'
           element={<ListApplicationPage data={data} />}
         />
-        <Route path='/application/:id' element={<ItemApplicationComponent />} />
+        <Route path='/application/:id' element={<ItemApplicationComponent data={data} />} />
         <Route path='/application/:id/edit' element='edit' />
       </Routes>
     </div>

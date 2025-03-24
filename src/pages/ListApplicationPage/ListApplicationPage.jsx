@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { useNavigate } from 'react-router-dom'
 
-export default function ListApplicationPage ({ data }) {
+export default function ListApplicationPage({ data }) {
   const tableHead = [
     '№',
     'Название',
@@ -20,7 +20,6 @@ export default function ListApplicationPage ({ data }) {
     '№ УПД'
   ]
   const navigate = useNavigate()
-  console.log(navigate)
 
   return (
     <TableContainer component={Paper}>
@@ -40,7 +39,7 @@ export default function ListApplicationPage ({ data }) {
               }}
               key={item.id}
             >
-              <TableCell>{item.id}</TableCell>
+              <TableCell>1</TableCell>
               <TableCell>{item.title}</TableCell>
               <TableCell align='right'>{item.date}</TableCell>
               <TableCell align='right'>{item.status}</TableCell>

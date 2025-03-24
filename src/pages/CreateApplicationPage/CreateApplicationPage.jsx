@@ -3,7 +3,7 @@ import FormInputComponent from '../../components/FormInputComponent/FormInputCom
 import './CreateApplicationPage.scss'
 import { useRef, useState } from 'react'
 
-export default function CreateApplicationPage ({ heandlerSendData }) {
+export default function CreateApplicationPage({ heandlerSendData }) {
   const [valueStatus, setValueStatus] = useState('')
   const [valueTitle, setValueTitle] = useState('')
   const [valueUser, setValueUser] = useState('')
@@ -16,15 +16,31 @@ export default function CreateApplicationPage ({ heandlerSendData }) {
   const buttonClickPayment = useRef()
   const buttonClickPeceipt = useRef()
 
-  function heandlerClickInput (buttonSend) {
+  function heandlerClickInput(buttonSend) {
     buttonSend.current.click()
   }
 
-  function heandlerSetFile (set, e) {
+  function heandlerSetFile(set, e) {
     set(e)
   }
 
- 
+  function funcCleanUseState(method) {
+    switch (method) {
+      case "clean":
+        setValueStatus('')
+        setValueTitle('')
+        setValueUser('')
+        setFileInvoices('')
+        setFilePayment('')
+        setFilePeceipt('')
+        break;
+
+      default:
+        break;
+    }
+  }
+
+
 
   return (
     <div className='create-app-page'>
@@ -93,7 +109,8 @@ export default function CreateApplicationPage ({ heandlerSendData }) {
                 console.log(Error('Введите данные'))
                 return
               }
-              heandlerSendData(valueTitle, valueUser, valueStatus, fileInvoices, filePayment,filePeceipt)
+              heandlerSendData(valueTitle, valueUser, valueStatus, fileInvoices, filePayment, filePeceipt)
+              funcCleanUseState("clean")
             }}
           >
             Создать
@@ -102,7 +119,6 @@ export default function CreateApplicationPage ({ heandlerSendData }) {
           <input
             className='form__file'
             type='file'
-            multiple
             ref={buttonClickInvoices}
             onChange={e => {
               heandlerSetFile(setFileInvoices, e.target.files)
