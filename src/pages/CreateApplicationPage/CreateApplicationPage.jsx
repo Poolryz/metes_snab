@@ -8,13 +8,22 @@ export default function CreateApplicationPage({ heandlerSendData }) {
   const [valueTitle, setValueTitle] = useState('')
   const [valueUser, setValueUser] = useState('')
 
+  const [numberInvoise, setNumberInvoise] = useState('')
+  const [numberPayment, setNumberPayment] = useState('')
+  const [numberReceipt, setNumberReceipt] = useState('')
+
+  const [dateInvoise, setDateInvoise] = useState('')
+  const [datePayment, setDatePayment] = useState('')
+  const [dateReceipt, setDateReceipt] = useState('')
+
+
   const [fileInvoices, setFileInvoices] = useState([])
   const [filePayment, setFilePayment] = useState([])
-  const [filePeceipt, setFilePeceipt] = useState([])
+  const [fileReceipt, setFileReceipt] = useState([])
 
   const buttonClickInvoices = useRef()
   const buttonClickPayment = useRef()
-  const buttonClickPeceipt = useRef()
+  const buttonClickReceipt = useRef()
 
   function heandlerClickInput(buttonSend) {
     buttonSend.current.click()
@@ -32,7 +41,13 @@ export default function CreateApplicationPage({ heandlerSendData }) {
         setValueUser('')
         setFileInvoices('')
         setFilePayment('')
-        setFilePeceipt('')
+        setFileReceipt('')
+        setNumberInvoise('')
+        setNumberPayment('')
+        setNumberReceipt('')
+        setDateInvoise('')
+        setDatePayment('')
+        setDateReceipt('')
         break;
 
       default:
@@ -65,10 +80,20 @@ export default function CreateApplicationPage({ heandlerSendData }) {
             helperText={'Выберите статус'}
             select={true}
           >
-            <MenuItem value='job'>В работе</MenuItem>
-            <MenuItem value='saccess'>Выполнена</MenuItem>
-            <MenuItem value='cancel'>Отмена</MenuItem>
+            <MenuItem value='В работе'>В работе</MenuItem>
+            <MenuItem value='Выполнено'>Выполнена</MenuItem>
+            <MenuItem value='Закрыто'>Отмена</MenuItem>
           </FormInputComponent>
+          <FormInputComponent
+            setFunc={setNumberInvoise}
+            value={numberInvoise}
+            placeholder={'№ Счета'}
+          />
+          <FormInputComponent
+            setFunc={setDateInvoise}
+            value={dateInvoise}
+            placeholder={'Дата выставления счета'}
+          />
           <Button
             variant='contained'
             className='form__button'
@@ -79,6 +104,16 @@ export default function CreateApplicationPage({ heandlerSendData }) {
           >
             Прикрепить счет
           </Button>
+          <FormInputComponent
+            setFunc={setNumberPayment}
+            value={numberPayment}
+            placeholder={'№ Квитка'}
+          /><FormInputComponent
+            setFunc={setDatePayment}
+            value={datePayment}
+            placeholder={'Дата оплаты'}
+          />
+
           <Button
             variant='contained'
             className='form__button'
@@ -89,12 +124,22 @@ export default function CreateApplicationPage({ heandlerSendData }) {
           >
             Прикрепить квиток
           </Button>
+          <FormInputComponent
+            setFunc={setNumberReceipt}
+            value={numberReceipt}
+            placeholder={'№ УПД'}
+          />
+          <FormInputComponent
+            setFunc={setDateReceipt}
+            value={dateReceipt}
+            placeholder={'Дата УПД'}
+          />
           <Button
             variant='contained'
             className='form__button'
             color='primary'
             onClick={() => {
-              heandlerClickInput(buttonClickPeceipt)
+              heandlerClickInput(buttonClickReceipt)
             }}
           >
             Прикрепить УПД
@@ -109,7 +154,7 @@ export default function CreateApplicationPage({ heandlerSendData }) {
                 console.log(Error('Введите данные'))
                 return
               }
-              heandlerSendData(valueTitle, valueUser, valueStatus, fileInvoices, filePayment, filePeceipt)
+              heandlerSendData(valueTitle, valueUser, valueStatus, numberInvoise, dateInvoise, fileInvoices, numberPayment, datePayment, filePayment, numberReceipt, dateReceipt, fileReceipt)
               funcCleanUseState("clean")
             }}
           >
@@ -135,9 +180,9 @@ export default function CreateApplicationPage({ heandlerSendData }) {
           <input
             className='form__file'
             type='file'
-            ref={buttonClickPeceipt}
+            ref={buttonClickReceipt}
             onChange={e => {
-              heandlerSetFile(setFilePeceipt, e.target.files)
+              heandlerSetFile(setFileReceipt, e.target.files)
             }}
           />
         </div>

@@ -12,27 +12,37 @@ function App() {
     valueTitle,
     valueUser,
     valueStatus,
+    numberInvoise,
+    dateInvoise,
     fileInvoices = [],
+    numberPayment,
+    datePayment,
     filePayment = [],
-    filePeceipt = []
+    numberReceipt,
+    dateReceipt,
+    fileReceipt = []
   ) {
-    const formData = new FormData()
-    formData.append('fileInvoices', fileInvoices)
-
-    const send = fetch('http://localhost:3000/api', {
+    fetch('http://localhost:5000/api/applications', {
       method: 'POST',
-      body: formData
-    })
-    send.then(data => {
-      return console.log(data)
-    })
-    let obj = {
-      id: 3,
-      title: valueTitle,
-      responsible: valueUser,
-      status: valueStatus
-    }
-    data.push(obj)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: valueTitle,
+        responsible: valueUser,
+        status: valueStatus,
+        invoices: {
+          number: numberInvoise,
+          date: dateInvoise,
+        },
+        payment: {
+          number: numberPayment,
+          date: datePayment
+        },
+        receipt: {
+          number: numberReceipt,
+          date: dateReceipt
+        }
+      })
+    });
   }
 
   return (
