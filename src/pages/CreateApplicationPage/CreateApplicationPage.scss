@@ -1,15 +1,24 @@
 .form {
     &__flex {
-        display       : flex;
+        margin: 0 auto;
+        display: flex;
         flex-direction: column;
-        align-items   : flex-start;
-        gap           : 15px;
+        align-items: flex-start;
+        gap: 15px;
+        align-items: center;
+        max-width: 800px;
+
+        .wrapp {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
     }
 
     &__label {
-        font-size : 1.25rem;
+        font-size: 1.25rem;
         text-align: center;
-        display   : block;
+        display: block;
 
     }
 
@@ -17,13 +26,15 @@
 
     &__file {
         position: absolute;
-        width   : 0;
-        height  : 0;
+        width: 0;
+        height: 0;
         overflow: hidden;
         visibility: hidden;
 
     }
 
-    &__button {}
+    &__button {
+        flex: 0 0 200px;
+    }
 
 }

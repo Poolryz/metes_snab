@@ -60,94 +60,101 @@ export default function CreateApplicationPage({ heandlerSendData }) {
   return (
     <div className='create-app-page'>
       <div className='form'>
+        <FormLabel className='form__label'>
+          Форма для создания заявки
+        </FormLabel>
         <div className='form__flex'>
-          <FormLabel className='form__label'>
-            Форма для создания заявки
-          </FormLabel>
-          <FormInputComponent
-            setFunc={setValueTitle}
-            value={valueTitle}
-            placeholder={'Название заявки'}
-          />
-          <FormInputComponent
-            setFunc={setValueUser}
-            value={valueUser}
-            placeholder={'Ответственный'}
-          />
-          <FormInputComponent
-            setFunc={setValueStatus}
-            value={valueStatus}
-            helperText={'Выберите статус'}
-            select={true}
-          >
-            <MenuItem value='В работе'>В работе</MenuItem>
-            <MenuItem value='Выполнено'>Выполнена</MenuItem>
-            <MenuItem value='Закрыто'>Отмена</MenuItem>
-          </FormInputComponent>
-          <FormInputComponent
-            setFunc={setNumberInvoise}
-            value={numberInvoise}
-            placeholder={'№ Счета'}
-          />
-          <FormInputComponent
-            setFunc={setDateInvoise}
-            value={dateInvoise}
-            placeholder={'Дата выставления счета'}
-          />
-          <Button
-            variant='contained'
-            className='form__button'
-            color='primary'
-            onClick={() => {
-              heandlerClickInput(buttonClickInvoices)
-            }}
-          >
-            Прикрепить счет
-          </Button>
-          <FormInputComponent
-            setFunc={setNumberPayment}
-            value={numberPayment}
-            placeholder={'№ Квитка'}
-          /><FormInputComponent
-            setFunc={setDatePayment}
-            value={datePayment}
-            placeholder={'Дата оплаты'}
-          />
+          <div className="wrapp">
+            <FormInputComponent
+              setFunc={setValueTitle}
+              value={valueTitle}
+              placeholder={'Название заявки'}
+            />
+            <FormInputComponent
+              setFunc={setValueUser}
+              value={valueUser}
+              placeholder={'Ответственный'}
+            />
+            <FormInputComponent
+              setFunc={setValueStatus}
+              value={valueStatus}
+              helperText={'Выберите статус'}
+              select={true}
+            >
+              <MenuItem value='В работе'>В работе</MenuItem>
+              <MenuItem value='Выполнено'>Выполнена</MenuItem>
+              <MenuItem value='Закрыто'>Отмена</MenuItem>
+            </FormInputComponent>
+          </div>
+          <div className="wrapp">
+            <FormInputComponent
+              setFunc={setNumberInvoise}
+              value={numberInvoise}
+              placeholder={'№ Счета'}
+            />
+            <FormInputComponent
+              setFunc={setDateInvoise}
+              value={dateInvoise}
+              placeholder={'Дата выставления счета'}
+            />
+            <Button
+              variant='contained'
+              className='form__button'
+              color='primary'
+              onClick={() => {
+                heandlerClickInput(buttonClickInvoices)
+              }}
+            >
+              Прикрепить счет
+            </Button>
+          </div>
+          <div className="wrapp">
+            <FormInputComponent
+              setFunc={setNumberPayment}
+              value={numberPayment}
+              placeholder={'№ Квитка'}
+            /><FormInputComponent
+              setFunc={setDatePayment}
+              value={datePayment}
+              placeholder={'Дата оплаты'}
+            />
 
-          <Button
-            variant='contained'
-            className='form__button'
-            color='primary'
-            onClick={() => {
-              heandlerClickInput(buttonClickPayment)
-            }}
-          >
-            Прикрепить квиток
-          </Button>
-          <FormInputComponent
-            setFunc={setNumberReceipt}
-            value={numberReceipt}
-            placeholder={'№ УПД'}
-          />
-          <FormInputComponent
-            setFunc={setDateReceipt}
-            value={dateReceipt}
-            placeholder={'Дата УПД'}
-          />
-          <Button
-            variant='contained'
-            className='form__button'
-            color='primary'
-            onClick={() => {
-              heandlerClickInput(buttonClickReceipt)
-            }}
-          >
-            Прикрепить УПД
-          </Button>
-
+            <Button
+              variant='contained'
+              className='form__button'
+              color='primary'
+              onClick={() => {
+                heandlerClickInput(buttonClickPayment)
+              }}
+            >
+              Прикрепить квиток
+            </Button>
+          </div>
+          <div className="wrapp">
+            <FormInputComponent
+              setFunc={setNumberReceipt}
+              value={numberReceipt}
+              placeholder={'№ УПД'}
+            />
+            <FormInputComponent
+              setFunc={setDateReceipt}
+              value={dateReceipt}
+              placeholder={'Дата УПД'}
+            />
+            <Button
+              variant='contained'
+              className='form__button'
+              color='primary'
+              onClick={() => {
+                heandlerClickInput(buttonClickReceipt)
+              }}
+            >
+              Прикрепить УПД
+            </Button>
+          </div>
           <Button
             variant='outlined'
-            className='form__button'
+            className='form__select'
             color='primary'
             onClick={() => {
               if (!valueTitle || !valueUser || !valueStatus) {
@@ -160,32 +167,31 @@ export default function CreateApplicationPage({ heandlerSendData }) {
           >
             Создать
           </Button>
-
-          <input
-            className='form__file'
-            type='file'
-            ref={buttonClickInvoices}
-            onChange={e => {
-              heandlerSetFile(setFileInvoices, e.target.files)
-            }}
-          />
-          <input
-            className='form__file'
-            type='file'
-            ref={buttonClickPayment}
-            onChange={e => {
-              heandlerSetFile(setFilePayment, e.target.files)
-            }}
-          />
-          <input
-            className='form__file'
-            type='file'
-            ref={buttonClickReceipt}
-            onChange={e => {
-              heandlerSetFile(setFileReceipt, e.target.files)
-            }}
-          />
         </div>
+        <input
+          className='form__file'
+          type='file'
+          ref={buttonClickInvoices}
+          onChange={e => {
+            heandlerSetFile(setFileInvoices, e.target.files)
+          }}
+        />
+        <input
+          className='form__file'
+          type='file'
+          ref={buttonClickPayment}
+          onChange={e => {
+            heandlerSetFile(setFilePayment, e.target.files)
+          }}
+        />
+        <input
+          className='form__file'
+          type='file'
+          ref={buttonClickReceipt}
+          onChange={e => {
+            heandlerSetFile(setFileReceipt, e.target.files)
+          }}
+        />
       </div>
     </div>
   )

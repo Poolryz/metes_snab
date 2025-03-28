@@ -105,8 +105,8 @@ export default function ListApplicationPage({ data }) {
           {applications.map((item, index) => (
             <TableRow
               onClick={() => {
-                // navigate(`/application/${item._id}`)
-                funcDeleteApplication(item._id)
+                navigate(`/application/${item._id}`)
+                // funcDeleteApplication(item._id)
               }
               }
               style={{ cursor: 'pointer' }}
